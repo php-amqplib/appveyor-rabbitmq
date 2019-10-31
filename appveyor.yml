@@ -35,4 +35,5 @@ install:
 
 ## Run the actual test
 test_script:
-    - cmd /c "C:\Program Files\RabbitMQ Server\rabbitmq_server-%RABBITMQ_VERSION%\sbin\rabbitmqctl.bat" node_health_check -n rabbit@APPVYR-WIN
+    - SET
+    #- cmd /c "C:\Program Files\RabbitMQ Server\rabbitmq_server-%RABBITMQ_VERSION%\sbin\rabbitmqctl.bat" status -n rabbit@APPVYR-WIN
