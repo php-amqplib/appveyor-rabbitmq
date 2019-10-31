@@ -12,7 +12,7 @@ environment:
 cache:
     - C:\ProgramData\chocolatey\bin -> appveyor.yml
     - C:\ProgramData\chocolatey\lib -> appveyor.yml
-    - "%HOMEDRIVE%%HOMEPATH%\packages -> appveyor.yml"
+    - "%USERPROFILE%\\packages -> appveyor.yml"
 
 ## Set up environment variables
 init:
@@ -20,7 +20,7 @@ init:
 
 ## Install PHP and composer, and run the appropriate composer command
 install:
-    - choco config set cacheLocation "%HOMEDRIVE%%HOMEPATH%\packages"
+    - choco config set cacheLocation "%USERPROFILE%\\packages"
     # create same erlang cookie
     - ps: '[System.IO.File]::WriteAllText("C:\Users\appveyor\.erlang.cookie", "rabbitmq", [System.Text.Encoding]::ASCII)'
     - ps: '[System.IO.File]::WriteAllText("C:\Windows\System32\config\systemprofile\.erlang.cookie", "rabbitmq", [System.Text.Encoding]::ASCII)'
