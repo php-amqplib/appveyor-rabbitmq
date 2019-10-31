@@ -30,14 +30,14 @@ install:
     - choco install rabbitmq -y --version=%RABBITMQ_VERSION%
     - refreshenv
     - SET rabbitmq_version=%RABBITMQ_VERSION%  
-    - SET erlang_erts_version=10.4
+    - SET erlang_erts_version=erts-10.4
     - ps: Invoke-WebRequest "https://raw.githubusercontent.com/pika/pika/master/testdata/wait-epmd.ps1" -OutFile "wait-epmd.ps1"
     - ps: .\wait-epmd.ps1
     - cmd /c "C:\Program Files\RabbitMQ Server\rabbitmq_server-%RABBITMQ_VERSION%\sbin\rabbitmqctl.bat" ping -n rabbit@APPVYR-WIN
     - ps: Invoke-WebRequest "https://raw.githubusercontent.com/pika/pika/master/testdata/wait-rabbitmq.ps1" -OutFile "wait-rabbitmq.ps1"
-    #- ps: .\wait-rabbitmq.ps1
+    - ps: .\wait-rabbitmq.ps1
 
 ## Run the actual test
 test_script:
     - SET
-    #- cmd /c "C:\Program Files\RabbitMQ Server\rabbitmq_server-%RABBITMQ_VERSION%\sbin\rabbitmqctl.bat" status -n rabbit@APPVYR-WIN
+    - cmd /c "C:\Program Files\RabbitMQ Server\rabbitmq_server-%RABBITMQ_VERSION%\sbin\rabbitmqctl.bat" status -n rabbit@APPVYR-WIN
