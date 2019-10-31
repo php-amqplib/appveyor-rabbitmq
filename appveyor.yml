@@ -12,6 +12,7 @@ environment:
 cache:
     - C:\ProgramData\chocolatey\bin -> appveyor.yml
     - C:\ProgramData\chocolatey\lib -> appveyor.yml
+    - C:\Users\appveyor\packages -> appveyor.yml
 
 ## Set up environment variables
 init:
@@ -19,16 +20,18 @@ init:
 
 ## Install PHP and composer, and run the appropriate composer command
 install:
+    - choco config set cacheLocation C:\Users\appveyor\packages
     # create same erlang cookie
     - ps: '[System.IO.File]::WriteAllText("C:\Users\appveyor\.erlang.cookie", "rabbitmq", [System.Text.Encoding]::ASCII)'
     - ps: '[System.IO.File]::WriteAllText("C:\Windows\System32\config\systemprofile\.erlang.cookie", "rabbitmq", [System.Text.Encoding]::ASCII)'
     - choco install rabbitmq -y --version=%RABBITMQ_VERSION%
+    - SET RABBITMQ
     - refreshenv
     - SET RABBITMQ
     - cmd /c "C:\Program Files\RabbitMQ Server\rabbitmq_server-%RABBITMQ_VERSION%\sbin\rabbitmqctl.bat" ping -n rabbit@APPVYR-WIN
-    - SET rabbitmq_version=%RABBITMQ_VERSION%
-    - ps: Invoke-WebRequest "https://raw.githubusercontent.com/pika/pika/master/testdata/wait-rabbitmq.ps1" -OutFile "wait-rabbitmq.ps1"
-    - ps: .\wait-rabbitmq.ps1
+    #- SET rabbitmq_version=%RABBITMQ_VERSION%
+    #- ps: Invoke-WebRequest "https://raw.githubusercontent.com/pika/pika/master/testdata/wait-rabbitmq.ps1" -OutFile "wait-rabbitmq.ps1"
+    #- ps: .\wait-rabbitmq.ps1
 
 ## Run the actual test
 test_script:
