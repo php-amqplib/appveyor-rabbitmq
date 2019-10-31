@@ -12,7 +12,7 @@ environment:
 cache:
     - C:\ProgramData\chocolatey\bin -> appveyor.yml
     - C:\ProgramData\chocolatey\lib -> appveyor.yml
-    - %HOMEDRIVE%%HOMEPAT%\packages -> appveyor.yml
+    - "%HOMEDRIVE%%HOMEPATH%\packages" -> appveyor.yml
 
 ## Set up environment variables
 init:
