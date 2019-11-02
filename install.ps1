@@ -1,4 +1,3 @@
-
 Write-Output "Removing previous erlang versions..."
 Get-ChildItem -Path 'C:\Program Files\erl*\Uninstall.exe' | %{ Start-Process -Wait -NoNewWindow -FilePath $_ -ArgumentList '/S' }
 
@@ -9,8 +8,8 @@ Write-Output "Creating erlang cookie..."
 Write-Output "Installing RabbitMQ..."
 choco install rabbitmq -y --version=$env:RABBITMQ_VERSION
 
+Get-Content C:\ProgramData\chocolatey\logs\chocolatey.log -Wait
 refreshenv
-SET
 
 Invoke-WebRequest "https://raw.githubusercontent.com/pika/pika/master/testdata/wait-epmd.ps1" -OutFile "wait-epmd.ps1"
 Invoke-WebRequest "https://raw.githubusercontent.com/pika/pika/master/testdata/wait-rabbitmq.ps1" -OutFile "wait-rabbitmq.ps1"
@@ -24,4 +23,3 @@ Write0Output "Waiting for RabbitMQ..."
 .\wait-rabbitmq.ps1
 
 Write-Output ""
-
