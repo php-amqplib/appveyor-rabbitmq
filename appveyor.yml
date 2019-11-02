@@ -6,6 +6,7 @@ image: Visual Studio 2017
 
 ## Build matrix for lowest and highest possible targets
 environment:
+  ERTS_VERSION: erts-10.4
   RABBITMQ_VERSION: 3.7.17
 
 ## Cache CI dependencies
