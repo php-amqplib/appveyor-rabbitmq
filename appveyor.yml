@@ -10,8 +10,6 @@ environment:
 
 ## Cache CI dependencies
 cache:
-    - C:\ProgramData\chocolatey\bin -> appveyor.yml
-    - C:\ProgramData\chocolatey\lib -> appveyor.yml
     - "%USERPROFILE%\\packages"
 
 ## Set up environment variables
