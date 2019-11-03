@@ -8,7 +8,6 @@ Write-Output "Creating erlang cookie..."
 Write-Output "Installing RabbitMQ..."
 choco install rabbitmq -y --version=$env:RABBITMQ_VERSION
 
-Get-Content C:\ProgramData\chocolatey\logs\chocolatey.log -Wait
 refreshenv
 
 Invoke-WebRequest "https://raw.githubusercontent.com/pika/pika/master/testdata/wait-epmd.ps1" -OutFile "wait-epmd.ps1"
