@@ -6,7 +6,7 @@ image: Visual Studio 2017
 
 ## Build matrix for lowest and highest possible targets
 environment:
-  ERTS_VERSION: erts-10.4
+  ERLANG_VERSION: 10.4
   RABBITMQ_VERSION: 3.7.17
 
 ## Cache CI dependencies
@@ -20,7 +20,7 @@ init:
 ## Install PHP and composer, and run the appropriate composer command
 install:
     #- SET
-    #- choco config set cacheLocation "%USERPROFILE%\\packages"
+    - choco config set cacheLocation "%USERPROFILE%\\packages"
     - ps: .\install.ps1
 
 ## Run the actual test

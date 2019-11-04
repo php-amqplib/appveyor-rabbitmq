@@ -1,8 +1,6 @@
 Write-Output "Removing previous erlang versions..."
 Get-ChildItem -Path 'C:\Program Files\erl*\Uninstall.exe' | %{ Start-Process -Wait -NoNewWindow -FilePath $_ -ArgumentList '/S' }
 refreshenv
-# remove inherited erlang path
-Remove-Item Env:\ERLANG_HOME
 
 Write-Output "Creating erlang cookie..."
 [System.IO.File]::WriteAllText("C:\Users\appveyor\.erlang.cookie", "rabbitmq", [System.Text.Encoding]::ASCII)
@@ -15,7 +13,8 @@ refreshenv
 Invoke-WebRequest "https://raw.githubusercontent.com/pika/pika/master/testdata/wait-epmd.ps1" -OutFile "wait-epmd.ps1"
 Invoke-WebRequest "https://raw.githubusercontent.com/pika/pika/master/testdata/wait-rabbitmq.ps1" -OutFile "wait-rabbitmq.ps1"
 
-$env:erlang_erts_version=$env:ERTS_VERSION
+$env:ERLANG_HOME="c:\program files\erl$env:ERLANG_VERSION"
+$env:erlang_erts_version="erts-$env:ERLANG_VERSION"
 $env:rabbitmq_version=$env:RABBITMQ_VERSION
 
 Write-Output "Waiting for EPMD..."
