@@ -9,6 +9,7 @@ image: Visual Studio 2017
 environment:
   ERLANG_VERSION: 10.4
   RABBITMQ_VERSION: 3.7.17
+  RABBITMQCTL: C:\Program Files\RabbitMQ Server\rabbitmq_server-%RABBITMQ_VERSION%\sbin\rabbitmqctl.bat
 
 ## Cache CI dependencies
 cache:
@@ -27,4 +28,5 @@ install:
 ## Run the actual test
 test_script:
     - SET
-    - cmd /c "C:\Program Files\RabbitMQ Server\rabbitmq_server-%RABBITMQ_VERSION%\sbin\rabbitmqctl.bat" status -n rabbit@APPVYR-WIN
+    - cmd /c %RABBITMQCTL% status -n rabbit@APPVYR-WIN
+    - cmd /c %RABBITMQCTL% list_users
