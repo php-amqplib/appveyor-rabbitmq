@@ -1,5 +1,6 @@
 Write-Output "Removing previous erlang versions..."
 Get-ChildItem -Path 'C:\Program Files\erl*\Uninstall.exe' | %{ Start-Process -Wait -NoNewWindow -FilePath $_ -ArgumentList '/S' }
+refreshenv
 
 Write-Output "Creating erlang cookie..."
 [System.IO.File]::WriteAllText("C:\Users\appveyor\.erlang.cookie", "rabbitmq", [System.Text.Encoding]::ASCII)
