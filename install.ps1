@@ -7,13 +7,18 @@ Write-Output "Creating erlang cookie..."
 [System.IO.File]::WriteAllText("C:\Windows\System32\config\systemprofile\.erlang.cookie", "rabbitmq", [System.Text.Encoding]::ASCII)
 
 Write-Output "Installing RabbitMQ..."
-choco install rabbitmq -y --no-progress --version=$env:RABBITMQ_VERSION
+choco install rabbitmq -y --no-progress --version=$env:RABBITMQ_VERSION --package-parameters='"/NOMANAGEMENT"'
 refreshenv
+$env:ERLANG_HOME="c:\program files\erl$env:ERLANG_VERSION"
+
+$env:RABBITMQ_BIN="C:\Program Files\RabbitMQ Server\rabbitmq_server-$env:RABBITMQ_VERSION\sbin"
+
+Write-Output "Enable management plugin..."
+Start-Process "$env:RABBITMQ_BIN\rabbitmq-plugins.bat" 'enable --online rabbitmq_management' -NoNewWindow -Wait
 
 Invoke-WebRequest "https://raw.githubusercontent.com/pika/pika/master/testdata/wait-epmd.ps1" -OutFile "wait-epmd.ps1"
 Invoke-WebRequest "https://raw.githubusercontent.com/pika/pika/master/testdata/wait-rabbitmq.ps1" -OutFile "wait-rabbitmq.ps1"
 
-$env:ERLANG_HOME="c:\program files\erl$env:ERLANG_VERSION"
 $env:erlang_erts_version="erts-$env:ERLANG_VERSION"
 $env:rabbitmq_version=$env:RABBITMQ_VERSION
 
