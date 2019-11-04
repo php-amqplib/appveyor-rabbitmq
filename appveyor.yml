@@ -28,5 +28,5 @@ install:
 ## Run the actual test
 test_script:
     - SET
-    - cmd /c %RABBITMQCTL% status -n rabbit@APPVYR-WIN
-    - cmd /c %RABBITMQCTL% list_users
+    - cmd /c "%RABBITMQCTL%" status -n rabbit@APPVYR-WIN
+    - cmd /c "%RABBITMQCTL%" list_users
