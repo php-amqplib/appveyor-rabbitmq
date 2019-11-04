@@ -7,7 +7,7 @@ Write-Output "Creating erlang cookie..."
 [System.IO.File]::WriteAllText("C:\Windows\System32\config\systemprofile\.erlang.cookie", "rabbitmq", [System.Text.Encoding]::ASCII)
 
 Write-Output "Installing RabbitMQ..."
-choco install rabbitmq -y --no-pogress --trace --version=$env:RABBITMQ_VERSION
+choco install rabbitmq -y --no-pogress --version=$env:RABBITMQ_VERSION
 refreshenv
 
 Invoke-WebRequest "https://raw.githubusercontent.com/pika/pika/master/testdata/wait-epmd.ps1" -OutFile "wait-epmd.ps1"
