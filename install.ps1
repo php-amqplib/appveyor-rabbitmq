@@ -19,7 +19,7 @@ $env:rabbitmq_version=$env:RABBITMQ_VERSION
 
 Write-Output "Waiting for EPMD..."
 .\wait-epmd.ps1
-Write0Output "Waiting for RabbitMQ..."
+Write-Output "Waiting for RabbitMQ..."
 .\wait-rabbitmq.ps1
 
-Write-Output ""
+Write-Output "Installed and running."
